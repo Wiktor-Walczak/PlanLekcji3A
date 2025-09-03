@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>3A — Plan lekcji (interaktywny)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <h1>3A — plan lekcji</h1>
+      <p class="subtitle">Nowoczesny, responsywny i przyjazny widok</p>
+    </div>
+
+    <div class="controls" aria-hidden="false">
+      <div class="clock" id="clock" aria-live="polite">--:--:--</div>
+
+      <div class="filters">
+        <label for="groupSelect">Widok grupy:</label>
+        <select id="groupSelect" aria-label="Wybierz grupę">
+          <option value="all">Wszystkie</option>
+          <option value="group1">1. Grupa</option>
+          <option value="group2">2. Grupa</option>
+        </select>
+      </div>
+
+      <div class="searchwrap">
+        <input id="searchInput" placeholder="Szukaj przedmiotu..." aria-label="Szukaj przedmiotu" />
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="legend" role="note" aria-label="Legenda">
+      <div class="legend-item"><span class="chip subj-math" aria-hidden="true"></span> Mat</div>
+      <div class="legend-item"><span class="chip subj-lang" aria-hidden="true"></span> Języki obce</div>
+      <div class="legend-item"><span class="chip subj-pe" aria-hidden="true"></span> WF</div>
+      <div class="legend-item"><span class="chip subj-sci" aria-hidden="true"></span> Fizyka / Chemia / Bio</div>
+      <div class="legend-item"><span class="chip subj-other" aria-hidden="true"></span> Inne</div>
+    </section>
+
+    <section class="controls-extended">
+      <fieldset class="lang-toggles" aria-label="Widoczność przedmiotów">
+        <legend>Widoczność</legend>
+
+        <label class="toggle">
+          <input type="checkbox" id="toggleHisz" checked />
+          <span class="toggle-ui" aria-hidden="true"></span>
+          <span class="toggle-label">Hiszpański</span>
+        </label>
+
+        <label class="toggle">
+          <input type="checkbox" id="toggleRos" checked />
+          <span class="toggle-ui" aria-hidden="true"></span>
+          <span class="toggle-label">Rosyjski</span>
+        </label>
+
+        <label class="toggle">
+          <input type="checkbox" id="toggleNiem" checked />
+          <span class="toggle-ui" aria-hidden="true"></span>
+          <span class="toggle-label">Niemiecki</span>
+        </label>
+
+        <label class="toggle">
+          <input type="checkbox" id="toggleFran" checked />
+          <span class="toggle-ui" aria-hidden="true"></span>
+          <span class="toggle-label">Francuski</span>
+        </label>
+
+        <label class="toggle">
+          <input type="checkbox" id="toggleRel" checked />
+          <span class="toggle-ui" aria-hidden="true"></span>
+          <span class="toggle-label">Religia</span>
+        </label>
+
+        <label class="toggle">
+          <input type="checkbox" id="toggleEt" checked />
+          <span class="toggle-ui" aria-hidden="true"></span>
+          <span class="toggle-label">Etyka</span>
+        </label>
+
+        <label class="toggle">
+          <input type="checkbox" id="toggleEZ" checked />
+          <span class="toggle-ui" aria-hidden="true"></span>
+          <span class="toggle-label">EZ</span>
+        </label>
+
+        <label class="toggle">
+          <input type="checkbox" id="toggleAM" checked />
+          <span class="toggle-ui" aria-hidden="true"></span>
+          <span class="toggle-label">AM</span>
+        </label>
+
+      </fieldset>
+    </section>
+
+    <section class="timetable" id="timetable" aria-live="polite">
+      <!-- grid/table will be injected here by JS -->
+    </section>
+
+    <section class="dayview mobile-only" id="dayview" aria-hidden="true">
+      <!-- mobile single-day view -->
+      <div class="dayheader">
+        <button id="prevDay" class="nav-btn" aria-label="Poprzedni dzień">⟵</button>
+        <h2 id="currentDayName">Poniedziałek</h2>
+        <button id="nextDay" class="nav-btn" aria-label="Następny dzień">⟶</button>
+      </div>
+      <div id="mobilePeriods"></div>
+    </section>
+
+    <aside class="info-panel" aria-live="polite">
+      <h3>Szczegóły aktualnej lekcji</h3>
+      <div id="currentLessonCard" class="card muted">Brak aktywnej lekcji teraz.</div>
+      <div class="hint">Kliknij na przedmiot, aby zobaczyć szczegóły (sala, nauczyciel, zdjęcie). Użyj przełączników, aby ukryć/odkryć kategorie.</div>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <small>Stworzono na podstawie planu: <em>3A programistyczna</em>.</small>
+  </footer>
+
+  <!-- Modal for lesson details -->
+  <div id="lessonModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-panel" role="document">
+      <button class="modal-close" id="modalClose" aria-label="Zamknij okno">✕</button>
+      <div class="modal-content">
+        <img id="modalImage" alt="Zdjęcie nauczyciela" class="modal-image" />
+        <div class="modal-info">
+          <h2 id="modalTitle">Przedmiot</h2>
+          <p id="modalSub" class="muted small"></p>
+          <dl>
+            <dt>Sala</dt>
+            <dd id="modalRoom">—</dd>
+            <dt>Nauczyciel</dt>
+            <dd id="modalTeacher">—</dd>
+          </dl>
+          <div id="modalExtra" class="muted small"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
